@@ -29,6 +29,9 @@ app.use("/api/rfid", rfidRouter);
 const checkoutRouter = require(__dirname + "/controllers/checkout");
 app.use("/api/checkout", checkoutRouter);
 
+const orderRouter = require(__dirname + "/controllers/order");
+app.use("/api/order", orderRouter);
+
 app.listen(process.env.PORT || 8000, () =>
   console.log("Listening Port 8000...")
 );

@@ -27,4 +27,40 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.post("/add_product", async (req, res) => {
+  const name = req.body.name;
+  const Pro = await product.findOne({ name });
+  if (Pro) {
+    res.json({ success: false, message: "Your Product is already existed" });
+  } else {
+    let countProduct = await product.countDocuments();
+    if (!countProduct) {
+      newId = "P001";
+    }
+    if (countProduct < 9) {
+      countProduct++;
+      newId = "P00" + countProduct;
+    } else {
+      countProduct++;
+      newId = "P0" + countProduct;
+    }
+    try {
+      const newProduct =  new product({
+        id: newId,
+        name: req.body.name,
+        image: req.body.image,
+        price: req.body.price
+      });
+      await newProduct.save();
+      res.json({
+        success: true,
+        message: "Create product successfully",
+        data: newProduct,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
 module.exports = router;

@@ -145,7 +145,7 @@ router.post("/querydr", function (req, res, next) {
   };
 
   axios.post(vnp_Api, dataObj).then((response) => {
-    console.log(response);
+    //console.log(response);
     res.send(response.data);
   });
 });

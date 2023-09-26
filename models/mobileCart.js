@@ -1,31 +1,26 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const orderSchema = new Schema({
-  orderID: {
+const mobileCartSchema = new Schema({
+  cartID: {
     type: String,
     required: true,
   },
-  transactionID: {
-    type: String,
-    required: true,
-  },
-  transDate: {
-    type: String,
-  },
-  totalPrice: {
-    type: String,
-    require: true,
-  },
-  orderItem: [
+  cartItem: [
     {
+      id: {
+        type: String,
+      },
+      itemnumber: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
       productID: {
         type: String,
       },
-      productName: {
-        type: String,
-      },
-      image:{
+      image: {
         type: String,
       },
       quantity: {
@@ -41,12 +36,15 @@ const orderSchema = new Schema({
       ],
     },
   ],
-  payment: {
-    type: Boolean,
-  },
-  paymentMethod: {
+  totalPrice: {
     type: String,
+  },
+  RFID: {
+    type: Array,
+  },
+  verify: {
+    type: Boolean,
   },
 });
 
-module.exports = mongoose.model("order", orderSchema);
+module.exports = mongoose.model("mobileCart", mobileCartSchema);

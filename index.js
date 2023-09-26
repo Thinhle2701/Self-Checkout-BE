@@ -20,17 +20,34 @@ mongoose.connect(
   }
 );
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  next();
+});
+
 const productRouter = require(__dirname + "/controllers/product");
 app.use("/api/product", productRouter);
 
 const rfidRouter = require(__dirname + "/controllers/rfid");
 app.use("/api/rfid", rfidRouter);
 
-const checkoutRouter = require(__dirname + "/controllers/checkout");
-app.use("/api/checkout", checkoutRouter);
+const checkoutVNPAYRouter = require(__dirname + "/controllers/checkoutVNPAY");
+app.use("/api/checkoutvnp", checkoutVNPAYRouter);
 
 const orderRouter = require(__dirname + "/controllers/order");
 app.use("/api/order", orderRouter);
+
+const checkoutMoMoRouter = require(__dirname + "/controllers/checkoutMoMo");
+app.use("/api/checkoutmomo", checkoutMoMoRouter);
+
+const userRouter = require(__dirname + "/controllers/user");
+app.use("/api/user", userRouter);
+
+const cartRouter = require(__dirname + "/controllers/mobileCart");
+app.use("/api/cart", cartRouter);
+
+// const quickpayRouter = require(__dirname + "/controllers/QuickpayMomo");
+// app.use("/api/qpmomo", quickpayRouter);
 
 app.listen(process.env.PORT || 8000, () =>
   console.log("Listening Port 8000...")

@@ -47,6 +47,9 @@ const orderSchema = new Schema({
   paymentMethod: {
     type: String,
   },
+  orderDate:{
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model("order", orderSchema);

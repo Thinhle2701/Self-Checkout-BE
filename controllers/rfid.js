@@ -4,7 +4,7 @@ const RFID = require("../models/rfid");
 const axios = require("axios");
 const product = require("../models/product");
 const mqtt = require("mqtt");
-const connectUrl = `mqtt://broker.emqx.io:1883`;
+const connectUrl = `wss://broker.emqx.io:8084/mqtt`;
 
 const client = mqtt.connect(connectUrl, {
   clientId: "emqx_cloud_" + Math.random().toString(16).substring(2, 8),
@@ -43,9 +43,39 @@ router.post("/stop_write", async function (req, res) {
 });
 
 router.post("/start_scan", async function (req, res) {
-  let message = "Start to scan RFID";
-  client.publish("scanRFID", message);
   res.send("succes");
+});
+
+router.post("/verifyTag", async function (req, res) {
+  const { uuid, productID } = req.body;
+  try {
+    const rfidTag = await RFID.findOne({ uuid: uuid, productID: productID });
+    if (rfidTag) {
+      try {
+        const Pro = await product.findOne({ id: productID });
+        if (Pro) {
+          const responseData = {
+            uuid: rfidTag.uuid,
+            productID: Pro.id,
+            image: Pro.image,
+            name: Pro.name,
+            price: Pro.price,
+          };
+          res.send(responseData);
+        } else {
+          throw new Error("not exist product");
+        }
+      } catch (err) {
+        console.log(err.message);
+        res.send(400, err.message);
+      }
+    } else {
+      throw new Error("not exist RFID");
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.send(400, err.message);
+  }
 });
 
 router.post("/add_rfid", async function (req, res) {

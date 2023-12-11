@@ -34,22 +34,29 @@ router.post("/add_product", async (req, res) => {
   if (Pro) {
     res.json({ success: false, message: "Your Product is already existed" });
   } else {
-    let lastElement = await product.find().sort({ _id: -1 }).limit(1);
-    let currentID = lastElement[0].id.split("P")[1];
-    let newID = Number(currentID) + 1;
-
-    if (newID < 10) {
-      newId = "P00" + newID;
+    let newID = "";
+    let count = await product.count({});
+    if (count === 0) {
+      newID = "P001";
     } else {
-      if (newID > 10 && newID < 100) {
-        newId = "P0" + newID;
+      let lastElement = await product.find().sort({ _id: -1 }).limit(1);
+      let currentID = lastElement[0].id.split("P")[1];
+      newID = Number(currentID) + 1;
+
+      if (newID < 10) {
+        newID = "P00" + newID;
       } else {
-        newID = "P" + newID;
+        if (newID > 10 && newID < 100) {
+          newID = "P0" + newID;
+        } else {
+          newID = "P" + newID;
+        }
       }
     }
+
     try {
       const newProduct = new product({
-        id: newId,
+        id: newID,
         name: req.body.name,
         image: req.body.image,
         price: req.body.price,

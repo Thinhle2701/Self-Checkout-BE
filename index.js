@@ -12,6 +12,10 @@ app.use(cors());
 //   res.sendFile(__dirname + "/index.html");
 // });
 
+app.get("/", function (req, res) {
+  res.send("Hello World");
+});
+
 mongoose.connect(
   "mongodb+srv://thinh:123@cluster0.ydjcp.mongodb.net/SelfCheckout",
   (err) => {

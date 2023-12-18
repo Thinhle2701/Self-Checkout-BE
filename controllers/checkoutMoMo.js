@@ -12,12 +12,12 @@ router.post("/atm", async function (request, response) {
   var orderInfo = "pay with MoMo";
 
   //local
-  // var redirectUrl = "http://localhost:3000/checkoutmomo";
-  // var ipnUrl = "http://localhost:3000/checkoutmomo";
+  var redirectUrl = "http://localhost:3000/checkoutmomo";
+  var ipnUrl = "http://localhost:3000/checkoutmomo";
 
   //deploy
-  var redirectUrl = "https://selfcheckout.vercel.app/checkoutmomo";
-  var ipnUrl = "https://selfcheckout.vercel.app/checkoutmomo";
+  // var redirectUrl = "https://selfcheckout.vercel.app/checkoutmomo";
+  // var ipnUrl = "https://selfcheckout.vercel.app/checkoutmomo";
 
   var amount = request.body.amount;
   // var requestType = "captureWallet";
@@ -110,8 +110,14 @@ router.post("/qrcode", async function (request, response) {
   var requestId = partnerCode + new Date().getTime();
   var orderId = requestId;
   var orderInfo = "pay with MoMo";
-  var redirectUrl = "https://selfcheckout.vercel.app/checkoutmomo";
-  var ipnUrl = "https://selfcheckout.vercel.app/checkoutmomo";
+
+  //deploy
+  //var redirectUrl = "https://selfcheckout.vercel.app/checkoutmomo";
+  //var ipnUrl = "https://selfcheckout.vercel.app/checkoutmomo";
+
+  local;
+  var redirectUrl = "http://localhost:3000/checkoutmomo";
+  var ipnUrl = "http://localhost:3000/checkoutmomo";
 
   var amount = request.body.amount;
   var requestType = "captureWallet";

@@ -171,7 +171,8 @@ router.post("/querydr", function (req, res, next) {
       apiLink: vnp_Api,
       response: response.data,
     };
-    res.send(objVNP);
+    //res.send(objVNP);
+    res.send(response.data);
   });
 });
 

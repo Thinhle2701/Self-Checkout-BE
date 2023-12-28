@@ -143,10 +143,16 @@ router.post("/querydr", function (req, res, next) {
     vnp_IpAddr: vnp_IpAddr,
     vnp_SecureHash: vnp_SecureHash,
   };
+  console.log(dataObj);
 
-  axios.post(vnp_Api, dataObj).then((response) => {
+  axios.post(vnp_Api, dataObj, { vnp_Command: "querydr" }).then((response) => {
     //console.log(response);
-    res.send(response.data);
+    const objVNP = {
+      vnpCallData: dataObj,
+      apiLink: vnp_Api,
+      response: response.data,
+    };
+    res.send(objVNP);
   });
 });
 

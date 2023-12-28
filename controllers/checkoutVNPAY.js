@@ -140,7 +140,7 @@ router.post("/querydr", function (req, res, next) {
     vnp_OrderInfo: vnp_OrderInfo,
     vnp_TransactionDate: vnp_TransactionDate,
     vnp_CreateDate: vnp_CreateDate,
-    vnp_IpAddr: vnp_IpAddr,
+    vnp_IpAddr: "::1",
     vnp_SecureHash: vnp_SecureHash,
   };
   console.log(dataObj);

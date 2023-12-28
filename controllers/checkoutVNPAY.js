@@ -109,6 +109,25 @@ router.post("/querydr", function (req, res, next) {
   let currCode = "VND";
   let vnp_CreateDate = moment(date).format("YYYYMMDDHHmmss");
 
+  // let data =
+  //   vnp_RequestId +
+  //   "|" +
+  //   vnp_Version +
+  //   "|" +
+  //   vnp_Command +
+  //   "|" +
+  //   vnp_TmnCode +
+  //   "|" +
+  //   vnp_TxnRef +
+  //   "|" +
+  //   vnp_TransactionDate +
+  //   "|" +
+  //   vnp_CreateDate +
+  //   "|" +
+  //   vnp_IpAddr +
+  //   "|" +
+  //   vnp_OrderInfo;
+
   let data =
     vnp_RequestId +
     "|" +
@@ -124,7 +143,7 @@ router.post("/querydr", function (req, res, next) {
     "|" +
     vnp_CreateDate +
     "|" +
-    vnp_IpAddr +
+    "::1" +
     "|" +
     vnp_OrderInfo;
 

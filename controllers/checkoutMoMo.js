@@ -111,7 +111,7 @@ router.post("/qrcode", async function (request, response) {
   var orderId = requestId;
   var orderInfo = "pay with MoMo";
 
-  deploy
+  //deploy
   var redirectUrl = "https://selfcheckout.vercel.app/checkoutmomo";
   var ipnUrl = "https://selfcheckout.vercel.app/checkoutmomo";
 

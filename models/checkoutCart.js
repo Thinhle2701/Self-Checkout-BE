@@ -1,0 +1,56 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const checkoutCartSchema = new Schema({
+  cartID: {
+    type: String,
+    required: true,
+  },
+  cartItem: [
+    {
+      id: {
+        type: String,
+      },
+      itemnumber: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      productID: {
+        type: String,
+      },
+      image: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+      },
+      price: {
+        type: String,
+      },
+      uuid: [
+        {
+          type: String,
+        },
+      ],
+    },
+  ],
+  totalPrice: {
+    type: String,
+  },
+  RFID: {
+    type: Array,
+  },
+  createdDate: {
+    type: Date,
+  },
+  deviceID:{
+    type: String,
+  },
+  scanned:{
+    type: Boolean
+  }
+});
+
+module.exports = mongoose.model("checkoutCart", checkoutCartSchema);

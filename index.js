@@ -50,6 +50,12 @@ app.use("/api/user", userRouter);
 const cartRouter = require(__dirname + "/controllers/mobileCart");
 app.use("/api/cart", cartRouter);
 
+const sseRouter = require(__dirname + "/controllers/sse");
+app.use("/api/sse", sseRouter);
+
+const checkoutCartRouter = require(__dirname + "/controllers/checkoutCart");
+app.use("/api/checkoutcart", checkoutCartRouter);
+
 // const quickpayRouter = require(__dirname + "/controllers/QuickpayMomo");
 // app.use("/api/qpmomo", quickpayRouter);
 

@@ -59,10 +59,8 @@ router.post("/transfer_rfid_tag", async (req, res) => {
                     },
                   }
                 );
-                console.log("insert successfully");
               } else {
                 var found = checkoutCartObject.RFID.includes(uuid);
-                console.log(found);
                 if (found === true) {
                   console.log("exist item");
                 } else {
@@ -85,7 +83,7 @@ router.post("/transfer_rfid_tag", async (req, res) => {
                       insertQTYobj.totalPrice =
                         Number(insertQTYobj.totalPrice) + Number(Pro.price);
                       insertQTYobj.cartItem[i].uuid = currUUIDArr;
-                      var RFIDArr = [];
+                      var RFIDArr = insertQTYobj.RFID;
                       RFIDArr.push(rfidTag.uuid);
                       await checkoutCart.updateOne(
                         { cartID: cartID },
@@ -156,7 +154,6 @@ router.post("/transfer_rfid_tag", async (req, res) => {
   } catch (err) {
     console.log(err.message);
   }
-
   //console.log(req.body);
 
   return res.json({ message: "Success" });

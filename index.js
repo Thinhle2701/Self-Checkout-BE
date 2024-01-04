@@ -56,6 +56,9 @@ app.use("/api/sse", sseRouter);
 const checkoutCartRouter = require(__dirname + "/controllers/checkoutCart");
 app.use("/api/checkoutcart", checkoutCartRouter);
 
+const mobileSSERouter = require(__dirname + "/controllers/mobileSSE");
+app.use("/api/mobilesse", mobileSSERouter);
+
 // const quickpayRouter = require(__dirname + "/controllers/QuickpayMomo");
 // app.use("/api/qpmomo", quickpayRouter);
 

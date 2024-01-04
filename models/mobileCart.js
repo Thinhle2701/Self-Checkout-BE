@@ -45,6 +45,15 @@ const mobileCartSchema = new Schema({
   verify: {
     type: Boolean,
   },
+  createdDate: {
+    type: Date,
+  },
+  deviceID: {
+    type: String,
+  },
+  scanned: {
+    type: Boolean,
+  },
 });
 
 module.exports = mongoose.model("mobileCart", mobileCartSchema);

@@ -3,6 +3,7 @@ const router = express.Router();
 const order = require("../models/order");
 const axios = require("axios");
 const product = require("../models/product");
+const membership = require("../models/membership");
 
 router.get("/", async (req, res) => {
   try {
@@ -26,6 +27,7 @@ router.post("/add_order", async (req, res) => {
       orderItem,
       payment,
       paymentMethod,
+      orderBy,
     } = req.body;
     let countOrd = await order.countDocuments();
     if (!countOrd) {
@@ -49,8 +51,24 @@ router.post("/add_order", async (req, res) => {
         payment: payment,
         paymentMethod: paymentMethod,
         orderDate: dateSort,
+        orderBy: orderBy,
       });
       await newOrder.save();
+      if (orderBy !== "new customer") {
+        const memObject = await membership.findOne({ customerID: orderBy });
+
+        console.log(memObject.point);
+        const newValuePoint = memObject.point + Number(totalPrice) / 1000;
+        await membership.updateOne(
+          { customerID: orderBy },
+          {
+            $set: {
+              point: newValuePoint,
+            },
+          }
+        );
+      }
+
       res.json({
         success: true,
         message: "Create order successfully",

@@ -25,7 +25,7 @@ const orderSchema = new Schema({
       productName: {
         type: String,
       },
-      image:{
+      image: {
         type: String,
       },
       quantity: {
@@ -47,8 +47,11 @@ const orderSchema = new Schema({
   paymentMethod: {
     type: String,
   },
-  orderDate:{
+  orderDate: {
     type: Date,
+  },
+  orderBy: {
+    type: String,
   },
 });
 
